@@ -1,0 +1,29 @@
+{% extends 'song_search/search.html' %}
+
+
+{% block body %}
+<div class="results">
+    <h3>Showing {{ number_of_results }} search results for {{ media_type }} {{ search_term }}</h3>
+    
+        {% for result in results %}
+
+        <div class="card mb-2" style="max-width: 700px;">
+            <div class="row g-0">
+              <div class="col-md-2">
+                <img src="{{ result.artworkUrl100 }}" class="img-fluid rounded-start">
+              </div>
+              <div class="col-md-10" style="display: flex;">
+                <div class="card-body">
+                  <h5 class="card-title"><a class="album_name" href="{{ result.collectionViewUrl }}" target="_blank" rel="noopener noreferrer">{{ result.collectionName|slice:"0:44" }}</a></h5>
+                  <p class="card-text"><a class="artist_name" href="{{ result.artistViewUrl }}" target="_blank" rel="noopener noreferrer">{{ result.artistName }}</a></p>
+                  <p class="card-text"><small class="text-muted">Released on {{ result.releaseDate|slice:"0:10" }}</small></p>
+                </div>
+                <div class="price">${{ result.collectionPrice }}</div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+</div>
+    <br>
+    
+{% endblock %}
